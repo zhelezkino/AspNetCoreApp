@@ -45,10 +45,46 @@ void Func4()
 
 }
 
+void Func5()
+{
+
+}
+
+void Func6()
+{
+
+}
+
+void Func7()
+{
+
+}
+
+void Func8()
+{
+
+}
+
+void Func9()
+{
+
+}
+
+void Func10()
+{
+
+}
+
 //Func1();
 //Func2();
 //Func3(); // curl -X POST https://localhost:7094/api/greet -H "Content-Type: application/json" -d "{\"Name\": \"Alice\"}"
 Func4();
+Func5();
+Func6();
+Func7();
+Func8();
+Func9();
+Func10();
 
 app.Run();
 
