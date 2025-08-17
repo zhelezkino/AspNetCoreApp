@@ -19,11 +19,15 @@ app.UseRouting();
 app.UseAuthorization();
 app.MapRazorPages();
 
+// Простой Web API для получения "Hello, World!"
+// Запуск в браузере: https://localhost:7000/api/hello
 void Func1()
 {
     app.MapGet("/api/hello", () => "Hello, World!");
 }
 
+// Возврат JSON с данными пользователя
+// Запуск в браузере: https://localhost:7000/api/user
 void Func2()
 {
     app.MapGet("/api/user", () =>
@@ -32,6 +36,10 @@ void Func2()
     });
 }
 
+// Приём данных через POST и возврат ответа
+// Вспомогательный класс: record UserRequest(string Name);
+// Тест через Postman или curl: 
+// curl -X POST https://localhost:7000/api/greet -H "Content-Type: application/json" -d "{\"Name\": \"Alice\"}"
 void Func3()
 {
     app.MapPost("/api/greet", (UserRequest request) =>
@@ -40,6 +48,7 @@ void Func3()
     });
 }
 
+// Валидация входных данных. Проверить, что поле Name не пустое.
 void Func4()
 {
 
@@ -76,14 +85,24 @@ void Func10()
 }
 
 //Func1();
+
 //Func2();
-//Func3(); // curl -X POST https://localhost:7094/api/greet -H "Content-Type: application/json" -d "{\"Name\": \"Alice\"}"
+
+//Func3();
+// curl -X POST https://localhost:7094/api/greet -H "Content-Type: application/json" -d "{\"Name\": \"Alice\"}"
+
 Func4();
+
 Func5();
+
 Func6();
+
 Func7();
+
 Func8();
+
 Func9();
+
 Func10();
 
 app.Run();
