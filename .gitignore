@@ -1,0 +1,44 @@
+## Ignore Build Folders
+bin/
+obj/
+
+## Ignore User-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## VS 2017 user-specific files
+.vs/
+
+## ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+## Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]inaries/
+
+## MSTest
+TestResults/
+
+## NuGet Packages
+*.nupkg
+packages/
+
+# Microsoft Azure Web App publish settings
+PublishProfiles/
+
+# ASP.NET Core
+project.lock.json
+*.db
+*.log
+*.sqlite
