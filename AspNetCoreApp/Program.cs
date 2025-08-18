@@ -19,15 +19,15 @@ app.UseRouting();
 app.UseAuthorization();
 app.MapRazorPages();
 
-// Простой Web API для получения "Hello, World!"
-// Запуск в браузере: https://localhost:7000/api/hello
+/* Простой Web API для получения "Hello, World!" */
+/* Запуск в браузере: https://localhost:7094/api/hello */
 void Func1()
 {
     app.MapGet("/api/hello", () => "Hello, World!");
 }
 
-// Возврат JSON с данными пользователя
-// Запуск в браузере: https://localhost:7000/api/user
+/* Возврат JSON с данными пользователя */
+/* Запуск в браузере: https://localhost:7094/api/user */
 void Func2()
 {
     app.MapGet("/api/user", () =>
@@ -36,10 +36,10 @@ void Func2()
     });
 }
 
-// Приём данных через POST и возврат ответа
-// Вспомогательный класс: record UserRequest(string Name);
-// Тест через Postman или curl: 
-// curl -X POST https://localhost:7000/api/greet -H "Content-Type: application/json" -d "{\"Name\": \"Alice\"}"
+/* Приём данных через POST и возврат ответа */
+/* Вспомогательный класс: record UserRequest(string Name); */
+/* Тест через Postman или curl: */
+/* curl -X POST https://localhost:7094/api/greet -H "Content-Type: application/json" -d "{\"Name\": \"Alice\"}" */
 void Func3()
 {
     app.MapPost("/api/greet", (UserRequest request) =>
@@ -48,7 +48,7 @@ void Func3()
     });
 }
 
-// Валидация входных данных. Проверить, что поле Name не пустое.
+/* Валидация входных данных. Проверить, что поле Name не пустое. */
 void Func4()
 {
 
@@ -85,11 +85,14 @@ void Func10()
 }
 
 //Func1();
+/* Запуск в браузере: https://localhost:7094/api/hello */
 
 //Func2();
+/* Запуск в браузере: https://localhost:7094/api/user */
 
-//Func3();
-// curl -X POST https://localhost:7094/api/greet -H "Content-Type: application/json" -d "{\"Name\": \"Alice\"}"
+Func3();
+/* Тест через Postman или curl: */
+/* curl -X POST https://localhost:7094/api/greet -H "Content-Type: application/json" -d "{\"Name\": \"Alice\"}" */
 
 Func4();
 
