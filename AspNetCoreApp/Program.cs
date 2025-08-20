@@ -1,8 +1,13 @@
 using AspNetCoreApp.Models;
 using AspNetCoreApp.Services;
+using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
 using System.ComponentModel.DataAnnotations;
+
+/*------------------------------------------------------------------------------------------*/
+// Init builder
+/*------------------------------------------------------------------------------------------*/
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +17,22 @@ builder.Services.AddRazorPages();
 // Регистрируем свой сервис
 //builder.Services.AddScoped<IUserService, UserService>(); // При каждом HTTP-запросе создает новые экземпляры переменных
 builder.Services.AddSingleton<IUserService, UserService>(); // Один экземпляр переменных на все приложение (для работы с in-memory данными)
+
+// Добавляем Swagger
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "AspNetCoreApp",
+        Description = "A simple ASP.NET Core web API for learning"
+    });
+});
+
+/*------------------------------------------------------------------------------------------*/
+// Init app
+/*------------------------------------------------------------------------------------------*/
 
 var app = builder.Build();
 
@@ -27,6 +48,17 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
 app.MapRazorPages();
+
+// Включаем Swagger UI
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+/*------------------------------------------------------------------------------------------*/
+// Целевые функции проекта
+/*------------------------------------------------------------------------------------------*/
 
 // Простой API для получения "Hello, World!"
 // Тест в браузере: https://localhost:7094/api/hello
@@ -74,11 +106,11 @@ void Func4()
 // Валидация входных данных. Проверить, что поле Name не пустое
 // Дополнительно показать код результата выполнения
 // Вспомогательные классы: record UserRequest(string Name); record ApiResponse<T>
-// Тест 1 в cmd: curl -X POST https://localhost:7094/api/validate -H "Content-Type: application/json" -d "{\"Name\": \"Alice\"}"
-// Тест 2 в cmd: curl -X POST https://localhost:7094/api/validate -H "Content-Type: application/json" -d "{\"Name\": \"\"}"
+// Тест 1 в cmd: curl -X POST https://localhost:7094/api/validate41 -H "Content-Type: application/json" -d "{\"Name\": \"Alice\"}"
+// Тест 2 в cmd: curl -X POST https://localhost:7094/api/validate41 -H "Content-Type: application/json" -d "{\"Name\": \"\"}"
 void Func4_1()
 {
-    app.MapPost("/api/validate", (UserRequest request) =>
+    app.MapPost("/api/validate41", (UserRequest request) =>
     {
         if (string.IsNullOrWhiteSpace(request.Name))
         {
