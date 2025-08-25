@@ -1,0 +1,100 @@
+su
+apt update -y
+apt upgrade -y
+
+apt install -y wget
+wget https://packages.microsoft.com/config/debian/13/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+	ls
+	export PATH=$PATH:/sbin:/usr/sbin
+dpkg -i packages-microsoft-prod.deb
+rm packages-microsoft-prod.deb
+apt update
+
+apt install -y apt-transport-https
+apt update
+
+### Dotnet install
+
+//apt install -y dotnet-sdk-8.0
+//dotnet --version
+
+wget https://builds.dotnet.microsoft.com/dotnet/Sdk/8.0.413/dotnet-sdk-8.0.413-linux-x64.tar.gz -O dotnet-sdk-8.0.tar.gz
+# Создаём папку для .NET
+sudo mkdir -p /opt/dotnet
+# Распаковываем архив
+sudo tar -xzf dotnet-sdk-8.0.100-linux-x64.tar.gz -C /opt/dotnet
+dotnet --list-sdks # Return Ok
+dotnet --info # Return bad message
+
+# Если хочешь, чтобы .NET был доступен для всех пользователей, создай файл в /etc/profile.d/dotnet.sh:
+nano /etc/profile.d/dotnet.sh
+# Содержимое:
+export DOTNET_ROOT="/opt/dotnet"
+export PATH="/opt/dotnet:$PATH"
+# Сделай файл исполняемым:
+chmod +x /etc/profile.d/dotnet.sh
+
+apt-cache search libicu
+apt install libicu76
+dotnet --info # Return Ok
+
+### Git install
+
+apt update
+apt install -y git
+
+git config --global user.name "name"
+git config --global user.email "email@email.com"
+
+mkdir projects && cd projects
+git clone https://github.com/zhelezkino/AspNetCoreApp.git
+
+cd AspNetCoreApp
+cd AspNetCoreApp
+dotnet restore
+dotnet build
+dotnet run
+
+# Загрузи информацию о всех ветках
+git fetch origin
+# Переключись на ветку add/temp
+git checkout add/temp
+
+### Dotnet app run
+
+dotnet build
+dotnet run --urls "http://0.0.0.0:5029" 
+http://localhost:5029/swagger/index.html
+
+# Когда захочешь "упаковать" приложение:
+dotnet publish -c Release -r linux-x64 --self-contained true
+# После этого можно будет запускать без установки .NET SDK:
+./bin/Release/net8.0/linux-x64/publish/dotnetapp
+
+### Docker install
+
+
+
+
+
+
+
+
+# Собрать образ
+docker build -t my-api .
+# Запустить контейнер
+docker run -d -p 5029:80 my-api
+//docker run -d -p 5029:80 my-api:latest
+# Проверь, что контейнер работает
+docker ps
+
+# Посмотреть логи контейнера
+docker logs myapi
+# Остановить контейнер
+docker stop myapi
+# Удалить контейнер
+docker rm myapi
+# Удалить образ
+docker rmi aspnet-api
+# Пересобрать и перезапустить
+docker stop myapi && docker rm myapi && docker build -t aspnet-api . && docker run -d -p 5029:80 --name myapi aspnet-api

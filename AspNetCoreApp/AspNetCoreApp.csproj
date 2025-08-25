@@ -1,13 +1,23 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+	    <!-- Begin init for Swagger -->
+	    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+	    <IncludeSymbolsInDocumentationFile>true</IncludeSymbolsInDocumentationFile>
+        <!-- End init for Swagger -->
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.3" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.8" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.3" />
+        <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="9.0.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Help\" />
+    </ItemGroup>
 
 </Project>

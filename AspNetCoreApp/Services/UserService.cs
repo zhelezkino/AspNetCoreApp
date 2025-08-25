@@ -5,32 +5,34 @@ namespace AspNetCoreApp.Services
 {
     public class UserService : IUserService
     {
-        private readonly List<UserFunc8> _users = new();
+        private readonly List<UserModel> _users = new();
         private int _nextId = 1;
 
         public UserService()
         {
             if (_users.Count == 0)
             {
-                _users.Add(new UserFunc8(_nextId++, "Alice"));
-                _users.Add(new UserFunc8(_nextId++, "Bob"));
-                _users.Add(new UserFunc8(_nextId++, "Tom"));
-                _users.Add(new UserFunc8(_nextId++, "Jerry"));
+                _users.Add(new UserModel { Id = _nextId++, Name = "Alice" });
+                _users.Add(new UserModel { Id = _nextId++, Name = "Bob" });
+                _users.Add(new UserModel { Id = _nextId++, Name = "Tom" });
+                _users.Add(new UserModel { Id = _nextId++, Name = "Jerry" });
+                _users.Add(new UserModel { Id = _nextId++, Name = "Billy" });
+                _users.Add(new UserModel { Id = _nextId++, Name = "Nancy" });
             }
         }
 
-        public IEnumerable<UserFunc8> GetAll()
+        public IEnumerable<UserModel> GetAll()
         {
             Console.WriteLine($"GetAll: returning {_users.Count} users");
             return _users;
         }
 
-        public UserFunc8? GetById(int id) => _users.FirstOrDefault(u => u.Id == id);
+        public UserModel? GetById(int id) => _users.FirstOrDefault(u => u.Id == id);
 
-        public UserFunc8 Create(string name)
+        public UserModel Create(string name)
         {
             Console.WriteLine($"Current count: {_users.Count}, creating user: {name}, ");
-            var user = new UserFunc8(_nextId++, name);
+            var user = new UserModel {Id = _nextId++, Name = name};
             _users.Add(user);
             Console.WriteLine($"After add: {_users.Count} users");
             return user;
